@@ -13,5 +13,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate_user
+    raise "Unauthorized" unless current_user
+  end
+
   alias set_current_user current_user
 end

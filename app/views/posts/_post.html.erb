@@ -1,0 +1,13 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <%= link_to post.url do %>
+      <span class="card-title">
+        <%= post.title %>
+      </span>
+    <% end %>
+    <% if current_user&.id == post.user_id%>
+      <hr>
+      <%= link_to "Remove", post_path(id: post.id), method: :delete, class: "small text-muted"%>
+    <% end %>
+  </div>
+</div>
