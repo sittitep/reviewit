@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   scope :auth do
     get 'github/callback' => 'github#callback'
   end
+
+  resource :sessions, only: [:destroy]
 end
