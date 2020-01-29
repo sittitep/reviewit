@@ -1,0 +1,10 @@
+<% if flash[:notice].present? %>
+  <div class="alert alert-<%= flash[:notice].keys.first %> alert-dismissible px-2 small mb-0" role="alert">
+    <div class="container">
+      <%= flash[:notice].values.first %>
+    </div>
+    <button type="button" class="close px-2 py-2" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
