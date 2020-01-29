@@ -6,5 +6,10 @@ Rails.application.routes.draw do
   end
 
   resource :sessions, only: [:destroy]
-  resources :posts, only: [:new, :create, :destroy]
+  resources :posts, only: [:new, :create, :destroy] do
+    member do
+      post 'up' => 'posts#up'
+      post 'down' => 'posts#down'
+    end
+  end
 end

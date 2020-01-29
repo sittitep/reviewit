@@ -1,10 +1,20 @@
 <div class="card mb-3">
-  <div class="card-body">
-    <%= link_to post.url do %>
-      <span class="card-title">
-        <%= post.title %>
-      </span>
-    <% end %>
+  <div class="card-body p-0">
+    <div class="media  d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+        <h5 class="m-0"><%= post.vote_count %></h4>
+      </div>
+      <div class="media-body p-3">
+        <%= link_to post.url do %>
+          <span class="card-title">
+            <%= post.title %>
+          </span>
+        <% end %>
+        <div class="small mt-4 text-right">
+          <%= link_to "Vote Up", up_post_path(id: post.id), method: :post %><span class="mx-1 text-muted">|</span><%= link_to "Vote Down", down_post_path(id: post.id), method: :post %>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="card-footer text-muted small py-2 d-flex align-items-center">
     <%= image_tag(post.user.avatar_url, width: 24, class: "rounded-circle mr-1") %> <%= link_to post.user.name, post.user.profile_url, class: "text-dark font-weight-bold mr-1" %> created 
@@ -14,3 +24,4 @@
     <% end %>
   </div>    
 </div>
+

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    raise "Unauthorized" unless current_user
+    redirect_to Github.authentication_url unless current_user
   end
 
   alias set_current_user current_user

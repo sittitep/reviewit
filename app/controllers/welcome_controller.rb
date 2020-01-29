@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @posts = Post.order("created_at DESC").includes(:user).all
+    @posts = Post.order("vote_count DESC").includes(:user).all
   end
 end
