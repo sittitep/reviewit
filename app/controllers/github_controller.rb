@@ -4,11 +4,12 @@ class GithubController < ApplicationController
 
     client = Octokit::Client.new(:access_token => response["access_token"])
     github_user = client.user
-    
+
     user = User.find_or_initialize_by(github_id: github_user.id)
     user.name = github_user.name
     user.email = github_user.email
     user.avatar_url = github_user.avatar_url
+    user.profile_url = github_user.html_url
     user.save
 
     cookies[:current_user_id] = {
