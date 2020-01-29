@@ -1,8 +1,22 @@
 <div class="card mb-3">
   <div class="card-body p-0">
     <div class="media  d-flex align-items-center">
-      <div class="d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+      <div class="d-flex align-items-center justify-content-center flex-column py-2" style="width: 60px;">
+        <div class="mb-1">
+          <%= link_to up_post_path(id: post.id), method: :post, class: "text-muted" do %>
+            <svg class="bi bi-shift-fill" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M9.27 4.047a1 1 0 011.46 0l6.345 6.769c.6.639.146 1.684-.73 1.684H13.5v3a1 1 0 01-1 1h-5a1 1 0 01-1-1v-3H3.654c-.875 0-1.328-1.045-.73-1.684L9.27 4.047z" clip-rule="evenodd"></path>
+            </svg>
+          <% end %>
+        </div>
         <h5 class="m-0"><%= post.vote_count %></h4>
+        <div class="mt-1" style="transform: rotate(180deg);">
+          <%= link_to down_post_path(id: post.id), method: :post, class: "text-muted" do %>
+            <svg class="bi bi-shift-fill" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M9.27 4.047a1 1 0 011.46 0l6.345 6.769c.6.639.146 1.684-.73 1.684H13.5v3a1 1 0 01-1 1h-5a1 1 0 01-1-1v-3H3.654c-.875 0-1.328-1.045-.73-1.684L9.27 4.047z" clip-rule="evenodd"></path>
+            </svg>
+        <% end %>
+        </div>
       </div>
       <div class="media-body p-3">
         <%= link_to post.url do %>
@@ -10,9 +24,6 @@
             <%= post.title %>
           </span>
         <% end %>
-        <div class="small mt-4 text-right">
-          <%= link_to "Vote Up", up_post_path(id: post.id), method: :post %><span class="mx-1 text-muted">|</span><%= link_to "Vote Down", down_post_path(id: post.id), method: :post %>
-        </div>
       </div>
     </div>
   </div>
