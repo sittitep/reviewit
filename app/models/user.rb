@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :voutes
 
   def name
-    super.presence || "annonymous"
+    super.presence || "anonymous"
   end
 
   def profile_url
