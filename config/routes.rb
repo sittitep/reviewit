@@ -12,5 +12,7 @@ Rails.application.routes.draw do
       post 'up' => 'posts#up'
       post 'down' => 'posts#down'
     end
+
+    resources :comments, only: [:create, :destroy]
   end
 end

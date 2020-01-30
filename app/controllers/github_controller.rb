@@ -17,6 +17,8 @@ class GithubController < ApplicationController
       :expires => 30.days.from_now
     }
 
+    flash[:notice] = {success: "You have logged in!"}
+
     redirect_to root_path
   end
 end

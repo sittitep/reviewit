@@ -4,3 +4,7 @@
 .font-prompt {
   font-family: 'Prompt', sans-serif;
 }
+
+.comment-list hr:last-child {
+  display: none;
+}

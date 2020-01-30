@@ -1,0 +1,13 @@
+<div class="card-body font-prompt text-dark p-0">
+  <p class="my-3">
+    <%= comment.text %>
+  </p>
+  <div class="text-muted py-2 d-flex align-items-center small">
+    <%= image_tag(comment.user.avatar_url, width: 24, class: "rounded-circle mr-1") %> <%= link_to comment.user.name, comment.user.profile_url, class: "text-dark font-weight-bold mr-1" %> created 
+    <%= time_ago_in_words(comment.created_at) + " ago" %>
+    <% if current_user&.id == comment.user_id%>
+      <span class="mx-1">|</span><%= link_to "Remove", post_comment_path(post_id: comment.post.id, id: comment.id), method: :delete %>
+    <% end %>
+  </div>
+</div>
+<hr>

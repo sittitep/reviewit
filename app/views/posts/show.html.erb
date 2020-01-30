@@ -1,1 +1,23 @@
 <%= render partial: "posts/post", locals: {post: @post} %>
+<div class="card p-3 comment-list mb-3">
+  <p class="font-weight-bold text-dark small">Comments (<%= @post.comment_count %>)</p>
+  <% if @post.comments.present? %>
+    <%= render partial: "comments/comment", collection: @post.comments %>
+  <% else %>
+    <div class="p-5 text-center small text-muted">
+      There are no comments :)
+    </div>
+  <% end %>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <p class="font-weight-bold text-dark small">Your Comment</p>
+    <%= form_with model: Comment.new, url: post_comments_path(post_id: @post.id), class: "form" do |f| %>
+      <div class="form-group">
+        <%= f.text_area :text, class: "form-control font-prompt", rows: 6 %>
+      </div>
+      <%= f.submit "Comment", class: "btn btn-primary btn-sm" %>
+    <% end %>
+  </div>
+</div>
