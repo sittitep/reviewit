@@ -1,1 +1,6 @@
-@import "~bootstrap/scss/bootstrap.scss"
+@import "~bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css?family=Prompt&display=swap");
+
+.font-prompt {
+  font-family: 'Prompt', sans-serif;
+}
