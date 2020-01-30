@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resource :sessions, only: [:destroy]
   resources :posts, only: [:new, :create, :destroy] do
     member do
+      get ':slug' => 'posts#show', as: 'slug'
       post 'up' => 'posts#up'
       post 'down' => 'posts#down'
     end

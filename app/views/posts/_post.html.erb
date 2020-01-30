@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="media-body p-3">
-        <%= link_to post.url do %>
+        <%= link_to slug_post_path(id: post.id, slug: post.slug) do %>
           <span class="card-title font-prompt">
             <%= post.title %>
           </span>
@@ -35,7 +35,9 @@
             <% end %>
           </p>
         <% end %>
-        <span class="small text-muted">Comments (0)</span>
+        <%= link_to slug_post_path(id: post.id, slug: post.slug) do %>
+          <span class="small text-muted">Comments (0)</span>
+        <% end %>
       </div>
     </div>
   </div>
