@@ -1,5 +1,5 @@
 <%= render partial: "posts/post", locals: {post: @post} %>
-<div class="card p-3 comment-list mb-3">
+<div class="card py-3 px-4 comment-list mb-3">
   <p class="font-weight-bold text-dark small">Comments (<%= @post.comment_count %>)</p>
   <% if @post.comments.present? %>
     <%= render partial: "comments/comment", collection: @post.comments %>
