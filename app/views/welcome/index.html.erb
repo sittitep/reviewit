@@ -1,6 +1,7 @@
 <div class="post-list">
   <% if @posts.present? %>
     <%= render partial: "posts/post", collection: @posts %>
+    <%= paginate(@posts) %>
   <% else %>
     <div class="card p-5 text-center small text-muted">
       There are no posts to review :)

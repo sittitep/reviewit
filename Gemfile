@@ -55,3 +55,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'oauth2'
 gem 'octokit', '~> 4.0'
+gem 'kaminari'
