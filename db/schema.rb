@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2020_02_01_174817) do
     t.integer "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "originator_type", null: false
-    t.uuid "originator_id", null: false
+    t.string "originator_type"
+    t.uuid "originator_id"
     t.index ["originator_type", "originator_id"], name: "index_votes_on_originator_type_and_originator_id"
     t.index ["user_id"], name: "index_votes_on_user_id"
   end

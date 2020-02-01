@@ -1,5 +1,5 @@
 class MigratePostVote < ActiveRecord::Migration[6.0]
-  def change
+  def up
     ActiveRecord::Base.transaction do
       Vote.find_each do |vote|
         vote.originator_type = "Post"
@@ -7,7 +7,9 @@ class MigratePostVote < ActiveRecord::Migration[6.0]
         vote.save
       end
     end
-    
-    remove_column :votes, :post_id
+  end
+
+  def change
+    remove_column :votes, :post_id, :integer
   end
 end
