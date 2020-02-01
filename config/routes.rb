@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       get ':slug' => 'posts#show', as: 'slug'
       post 'up' => 'posts#up'
       post 'down' => 'posts#down'
+      post 'resolve' => 'posts#resolve'
+      post 'close' => 'posts#close'
     end
 
     resources :comments, only: [:create, :destroy]

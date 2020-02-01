@@ -1,0 +1,6 @@
+<% if current_user&.id == post.user_id && post.active? %>
+  <div class="mb-3 d-flex align-items-center justify-content-end">
+    <%= link_to "Resolve", resolve_post_path(id: post.id), method: :post, class: "btn btn-sm btn-outline-success mr-3"%>
+    <%= link_to "Close", close_post_path(id: post.id), method: :post, class: "btn btn-sm btn-outline-secondary"%>
+  </div>
+<% end %>

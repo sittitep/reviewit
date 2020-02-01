@@ -10,20 +10,38 @@ class PostsController < ApplicationController
   end
 
   def create
-    current_user.posts.create(post_params)
+    post = current_user.posts.create(post_params)
 
     flash[:notice] = {success: "You have created the post!"}
 
-    redirect_to root_path
+    redirect_to slug_post_path(id: post.id, slug: post.slug)
   end
 
   def destroy
     post = Post.find(params[:id])
-    post.destroy
+    post.touch(:deleted_at)
     
     flash[:notice] = {success: "You have removed the post!"}
 
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
+  end
+
+  def resolve
+    post = Post.find(params[:id])
+    post.touch(:resolved_at)
+    
+    flash[:notice] = {success: "You have resolved the post!"}
+
+    redirect_back(fallback_location: root_path)
+  end
+
+  def close
+    post = Post.find(params[:id])
+    post.touch(:closed_at)
+    
+    flash[:notice] = {success: "You have closed the post!"}
+
+    redirect_back(fallback_location: root_path)
   end
 
   def up

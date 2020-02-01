@@ -44,8 +44,5 @@
   <div class="card-footer text-muted small py-2 d-flex align-items-center">
     <%= image_tag(post.user.avatar_url, width: 24, class: "rounded-circle mr-1") %> <%= link_to post.user.name, post.user.profile_url, class: "text-dark font-weight-bold mr-1" %> created 
     <%= time_ago_in_words(post.created_at) + " ago" %>
-    <% if current_user&.id == post.user_id%>
-      <span class="mx-1">|</span><%= link_to "Remove", post_path(id: post.id), method: :delete %>
-    <% end %>
   </div>    
 </div>
