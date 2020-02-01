@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :votes, dependent: :destroy
+  has_many :votes, dependent: :destroy, as: :originator
   has_many :comments, dependent: :destroy
 
   scope :active, -> { where(resolved_at: nil, closed_at: nil, deleted_at: nil) }

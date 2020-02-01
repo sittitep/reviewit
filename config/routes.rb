@@ -9,12 +9,15 @@ Rails.application.routes.draw do
   resources :posts, only: [:new, :create, :destroy] do
     member do
       get ':slug' => 'posts#show', as: 'slug'
-      post 'up' => 'posts#up'
-      post 'down' => 'posts#down'
       post 'resolve' => 'posts#resolve'
       post 'close' => 'posts#close'
     end
 
     resources :comments, only: [:create, :destroy]
+  end
+
+  scope ':originator_type/:originator_id' do
+    post 'up' => 'votes#create'
+    delete 'down' => 'votes#destroy'
   end
 end
