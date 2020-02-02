@@ -30,7 +30,8 @@ class PostsController < ApplicationController
   def resolve
     post = Post.find(params[:id])
     post.touch(:resolved_at)
-    
+    post.touch(:closed_at)
+
     flash[:notice] = {success: "You have resolved the post!"}
 
     redirect_back(fallback_location: root_path)
