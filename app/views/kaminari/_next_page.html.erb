@@ -6,6 +6,6 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<span class="next">
+<span class="next ml-auto">
   <%= link_to_unless current_page.last?, 'Next', url, rel: 'next', remote: remote, class: "btn btn-outline-primary btn-sm" %>
 </span>
