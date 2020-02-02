@@ -7,7 +7,7 @@ class VotesController < ApplicationController
     vote.value = 1
     vote.save!
 
-    flash[:notice] = {success: "You have voted up the post!"}
+    flash[:notice] = {success: "You have voted up the #{originator.class.name.downcase}!"}
 
     redirect_back(fallback_location: root_path)    
   end
@@ -18,7 +18,7 @@ class VotesController < ApplicationController
     vote.value = -1
     vote.save
 
-    flash[:notice] = {warning: "You have voted down the post!"}
+    flash[:notice] = {warning: "You have voted down the #{originator.class.name.downcase}!"}
 
     redirect_back(fallback_location: root_path) 
   end
