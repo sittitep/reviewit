@@ -1,8 +1,13 @@
-<div class="card-body font-prompt text-dark p-0">
-  <p class="my-3">
-    <%= comment.text %>
-  </p>
-  <div class="text-muted py-2 d-flex align-items-center small">
+<div class="card-body text-dark p-0">
+  <div class="media pt-3">
+    <%= render partial: "votes/vote", locals: {originator: comment} %>
+    <div class="media-body">
+      <p class="mb-3 pr-3 font-prompt">
+        <%= comment.text %>
+      </p>
+    </div>
+  </div>  
+  <div class="text-muted py-2 d-flex align-items-center small" style="padding: 20px">
     <%= image_tag(comment.user.avatar_url, width: 24, class: "rounded-circle mr-1") %> <%= link_to comment.user.name, comment.user.profile_url, class: "text-dark font-weight-bold mr-1" %> created 
     <%= time_ago_in_words(comment.created_at) + " ago" %>
     <% if current_user&.id == comment.user_id%>
@@ -10,4 +15,4 @@
     <% end %>
   </div>
 </div>
-<hr>
+<hr class="my-0">
