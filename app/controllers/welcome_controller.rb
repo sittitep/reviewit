@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @posts = Post.send(scope).order("vote_count DESC").includes(:user).page(params[:page])
+    @posts = Post.send(scope).includes(:user).page(params[:page])
   end
 
   private
