@@ -24,6 +24,9 @@
     <%= render "shared/navbar" %>
     <%= render "shared/alert" %>
     <div class="container py-4">
+      <div class="small mb-3 text-muted">
+        <%= render_breadcrumbs :separator => ' > ' %>
+      </div>
       <div class="row">
         <div class="col-md-8">
           <%= yield %>

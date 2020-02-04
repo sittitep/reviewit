@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:show]
+  before_action :set_post, only: [:show, :destroy, :resolve, :close]
+  before_action :set_branch_path, only: [:index, :show]
+  before_action :set_post_path, only: [:show]
 
   def index
     @posts = Post.send(scope).includes(:user).page(params[:page])
@@ -10,7 +13,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @comments = @post.comments.order("created_at ASC")
   end
 
@@ -23,8 +25,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.touch(:deleted_at)
+    @post.touch(:deleted_at)
     
     flash[:notice] = {success: "You have removed the post!"}
 
@@ -32,9 +33,8 @@ class PostsController < ApplicationController
   end
 
   def resolve
-    post = Post.find(params[:id])
-    post.touch(:resolved_at)
-    post.touch(:closed_at)
+    @post.touch(:resolved_at)
+    @post.touch(:closed_at)
 
     flash[:notice] = {success: "You have resolved the post!"}
 
@@ -42,8 +42,7 @@ class PostsController < ApplicationController
   end
 
   def close
-    post = Post.find(params[:id])
-    post.touch(:closed_at)
+    @post.touch(:closed_at)
     
     flash[:notice] = {success: "You have closed the post!"}
 
@@ -59,4 +58,16 @@ class PostsController < ApplicationController
   def scope
     @current_scope = params[:scope]&.to_sym || :open
   end  
+
+  def set_post
+    @post ||= Post.find(params[:id])
+  end
+
+  def set_branch_path
+    add_breadcrumb("b/#{params[:branch]}", branch_path(branch: params[:branch]))
+  end
+
+  def set_post_path
+    add_breadcrumb(@post.title, slug_post_path(branch: 'master', id: params[:id], slug: params[:slug]))
+  end
 end
