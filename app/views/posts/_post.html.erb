@@ -3,7 +3,7 @@
     <div class="media  d-flex align-items-center">
       <%= render partial: "votes/vote", locals: {originator: post} %>
       <div class="media-body py-3 pr-3">
-        <%= link_to slug_post_path(id: post.id, slug: post.slug) do %>
+        <%= link_to slug_post_path(branch: 'master', id: post.id, slug: post.slug) do %>
           <span class="card-title font-prompt">
             <%= post.title %>
           </span>
@@ -19,7 +19,7 @@
             <% end %>
           </p>
         <% end %>
-        <%= link_to slug_post_path(id: post.id, slug: post.slug) do %>
+        <%= link_to slug_post_path(branch: 'master', id: post.id, slug: post.slug) do %>
           <span class="small text-muted">Comments (<%= post.comment_count %>)</span>
         <% end %>
       </div>

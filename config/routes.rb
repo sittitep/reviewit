@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resource :sessions, only: [:destroy]
   resources :posts, only: [:new, :create, :destroy] do
     member do
-      get ':slug' => 'posts#show', as: 'slug'
       post 'resolve' => 'posts#resolve'
       post 'close' => 'posts#close'
     end
@@ -19,5 +18,12 @@ Rails.application.routes.draw do
   scope ':originator_type/:originator_id' do
     post 'up' => 'votes#create'
     delete 'down' => 'votes#destroy'
+  end
+
+  scope 'b' do
+    scope ':branch' do
+      root 'posts#index', as: 'branch'
+      get 'posts/:id/:slug' => 'posts#show', as: 'slug_post'
+    end
   end
 end

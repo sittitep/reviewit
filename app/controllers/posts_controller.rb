@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:show]
 
+  def index
+    @posts = Post.send(scope).includes(:user).page(params[:page])
+  end
+
   def new
     @post = Post.new
   end
@@ -15,7 +19,7 @@ class PostsController < ApplicationController
 
     flash[:notice] = {success: "You have created the post!"}
 
-    redirect_to slug_post_path(id: post.id, slug: post.slug)
+    redirect_to slug_post_path(branch: 'master', id: post.id, slug: post.slug)
   end
 
   def destroy
@@ -51,4 +55,8 @@ class PostsController < ApplicationController
   def post_params
     params.fetch(:post, {}).permit(:title, :url)
   end
+
+  def scope
+    @current_scope = params[:scope]&.to_sym || :open
+  end  
 end
