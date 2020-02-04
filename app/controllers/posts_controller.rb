@@ -6,6 +6,8 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.send(scope).includes(:user).page(params[:page])
+    @moderator = User.first
+    @contributors = User.joins(:posts).group("users.id").select("users.*, count(posts.id) AS count").order("count DESC").limit(3)
   end
 
   def new
