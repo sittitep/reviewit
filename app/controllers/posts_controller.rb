@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user, except: [:show]
+  before_action :authenticate_user, except: [:show, :index]
   before_action :set_post, only: [:show, :destroy, :resolve, :close]
   before_action :set_branch_path, only: [:index, :show]
   before_action :set_post_path, only: [:show]
