@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :posts
-  has_many :voutes
+  has_many :votes
+  has_many :comments
 
   def name
     super.presence || "anonymous"
