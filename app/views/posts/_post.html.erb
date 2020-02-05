@@ -27,7 +27,7 @@
   </div>
   <div class="card-footer text-muted small py-2 d-flex align-items-center px-0">
     <div class="justify-content-center d-flex" style="width: 60px;">
-      <%= image_tag(post.user.avatar_url, width: 24, class: "rounded-circle") %>
+      <%= image_tag(post.user.avatar_url, width: 24, height: 24, class: "rounded-circle") %>
     </div>
     <span class="pr-3">
       <%= link_to post.user.name, post.user.profile_url, class: "text-dark font-weight-bold mr-1" %> created 
