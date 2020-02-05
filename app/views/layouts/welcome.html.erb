@@ -23,34 +23,7 @@
   <body class="bg-light">
     <%= render "shared/navbar" %>
     <%= render "shared/alert" %>
-    <div class="jumbotron jumbotron-fluid p-0 bg-white">
-      <div class="container">
-        <div class="row d-flex align-items-center">
-          <div class="col-md-6 py-5">
-            <h1 class="display-5 font-prompt mb-3 text-dark">คอมมูนิตี้เพื่อ โปรแกรมเมอร์</h1>
-            <h1 class="display-5 font-prompt text-dark">โดยโปรแกรมเมอร์</h1>
-          </div>
-          <div class="col-md-6">
-            <%= image_pack_tag("banner.jpg", class: "w-100") %>
-          </div>
-        </div>
-      </div>
-    </div>    
-
-<!--     <div class="container py-4">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="small mb-3 text-muted">
-            <%= render_breadcrumbs :separator => ' > ' %>
-          </div>
-          <%= yield %>
-        </div>
-        <div class="col-md-4">
-          <%= yield(:sidebar) if content_for?(:sidebar)%>
-        </div>
-      </div>
-    </div>
- -->
+    <%= yield %>
   </body>
 </html>
 

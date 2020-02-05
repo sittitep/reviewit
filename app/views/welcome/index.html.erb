@@ -1,0 +1,31 @@
+<div class="jumbotron jumbotron-fluid p-0 bg-white">
+  <div class="container">
+    <div class="row d-flex align-items-center">
+      <div class="col-md-6 py-5">
+        <h1 class="display-5 font-prompt mb-3 text-dark">คอมมูนิตี้เพื่อ โปรแกรมเมอร์</h1>
+        <h1 class="display-5 font-prompt text-dark">โดยโปรแกรมเมอร์</h1>
+      </div>
+      <div class="col-md-6">
+        <%= image_pack_tag("banner.jpg", class: "w-100") %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <h2 class="mb-3">Latest Post</h2>
+      <%= render partial: "posts/post", collection: @posts %>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body p03">
+          <p class="mb-2">
+            <span class="font-weight-bold">Branches</span>
+          </p>
+          <%= link_to "b/master", branch_path(branch: "master"), class: "text-muted small" %>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>    
