@@ -1,12 +1,3 @@
-<div class="mb-3">
-  <% Post::QUERY_SCOPES.each do |scope| %>
-    <% if @current_scope == scope %>
-      <span class="small btn btn-sm btn-primary"><%= scope.to_s.capitalize %></span>
-    <% else %>
-      <%= link_to scope.to_s.capitalize, branch_path(branch: 'master', scope: scope), class: "text-muted small scope-link btn btn-sm" %>
-    <% end %>
-  <% end %>
-</div>
 <div class="post-list">
   <% if @posts.present? %>
     <%= render partial: "posts/post", collection: @posts %>
@@ -18,5 +9,8 @@
   <% end %>
 </div>
 <% content_for(:sidebar) do %>
-  <%= render partial: "branches/info" %>
+  <div class="mb-3">
+    <%= render partial: "branches/info", locals: {branch: @branch} %>
+  </div>
+  <%= render partial: "branches/branches" %>
 <% end %>

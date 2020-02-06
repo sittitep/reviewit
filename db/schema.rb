@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_054213) do
+ActiveRecord::Schema.define(version: 2020_02_06_144032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "branches", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "text"
@@ -25,6 +33,25 @@ ActiveRecord::Schema.define(version: 2020_02_02_054213) do
     t.integer "vote_count", default: 0
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "contributors", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "branch_id", null: false
+    t.integer "points", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_contributors_on_branch_id"
+    t.index ["user_id"], name: "index_contributors_on_user_id"
+  end
+
+  create_table "moderators", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "branch_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_moderators_on_branch_id"
+    t.index ["user_id"], name: "index_moderators_on_user_id"
   end
 
   create_table "posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -38,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_02_02_054213) do
     t.datetime "resolved_at"
     t.datetime "closed_at"
     t.datetime "deleted_at"
+    t.bigint "branch_id", null: false
+    t.index ["branch_id"], name: "index_posts_on_branch_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -64,6 +93,11 @@ ActiveRecord::Schema.define(version: 2020_02_02_054213) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "contributors", "branches"
+  add_foreign_key "contributors", "users"
+  add_foreign_key "moderators", "branches"
+  add_foreign_key "moderators", "users"
+  add_foreign_key "posts", "branches"
   add_foreign_key "posts", "users"
   add_foreign_key "votes", "users"
 end

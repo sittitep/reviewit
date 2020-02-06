@@ -5,9 +5,8 @@ class PostsController < ApplicationController
   before_action :set_post_path, only: [:show]
 
   def index
-    @posts = Post.send(scope).includes(:user).page(params[:page])
-    @moderator = User.first
-    @contributors = User.joins(:posts, :comments).group("users.id").select("users.*, count(posts.id) + count(comments.id) AS count").order("count DESC").limit(3)
+    @posts = @branch.posts.open.includes(:user).page(params[:page])
+    # @contributors = User.joins(:posts, :comments).group("users.id").select("users.*, count(posts.id) + count(comments.id) AS count").order("count DESC").limit(3)
   end
 
   def new
@@ -21,11 +20,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = current_user.posts.create(post_params)
+    post = current_user.posts.create!(post_params)
 
     flash[:notice] = {success: "You have created the post!"}
 
-    redirect_to slug_post_path(branch: 'master', id: post.id, slug: post.slug)
+    redirect_to slug_post_path(branch: post.branch.slug, id: post.id, slug: post.slug)
   end
 
   def destroy
@@ -56,7 +55,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.fetch(:post, {}).permit(:title, :url)
+    params.fetch(:post, {}).permit(:title, :url, :branch_id)
   end
 
   def scope
@@ -68,7 +67,7 @@ class PostsController < ApplicationController
   end
 
   def set_branch_path
-    add_breadcrumb("b/#{params[:branch]}", branch_path(branch: params[:branch]))
+    add_breadcrumb(@branch.display_name, branch_path(branch: @branch.slug))
   end
 
   def set_post_path

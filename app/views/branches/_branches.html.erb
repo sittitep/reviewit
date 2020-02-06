@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-body p03">
+    <p class="mb-2">
+      <span class="font-weight-bold">Branches</span>
+    </p>
+    <% Branch.all.each do |branch| %>
+      <%= link_to branch.display_name, branch_path(branch: branch.slug), class: "text-muted small mr-1" %>
+    <% end %>
+  </div>
+</div>

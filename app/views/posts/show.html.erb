@@ -24,5 +24,8 @@
   </div>
 <% end %>
 <% content_for(:sidebar) do %>
-  <%= render partial: "branches/info" %>
+  <div class="mb-3">
+    <%= render partial: "branches/info", locals: {branch: @branch} %>
+  </div>
+  <%= render partial: "branches/branches" %>
 <% end %>
