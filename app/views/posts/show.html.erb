@@ -13,7 +13,7 @@
   <% end %>
 </div>
 <% if @post.open? %>
-  <div class="card mb-3">
+  <div class="card mb-3 position-relative">
     <div class="card-body">
       <p class="font-weight-bold text-dark small">Your Comment</p>
       <%= form_with model: Comment.new, url: post_comments_path(post_id: @post.id), class: "form" do |f| %>
@@ -23,6 +23,11 @@
         <%= f.submit "Comment", class: "btn btn-primary btn-sm" %>
       <% end %>
     </div>
+    <% unless current_user.present? %>
+      <div class="blocker d-flex align-items-center" style="width: 100%;height: 100%;position: absolute; ;background: rgba(255,255,255,0.7);">
+        <%= link_to "Login to comment", Github.authentication_url, class: "btn btn-sm btn-outline-success ml-auto mr-auto" %>
+      </div>
+    <% end %>
   </div>
 <% end %>
 <% content_for(:sidebar) do %>
