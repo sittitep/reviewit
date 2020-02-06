@@ -8,3 +8,14 @@
 .comment-list hr:last-child {
   display: none;
 }
+
+.welcome-index-branch_list {
+  .branch_info {
+    @extend .col-lg-4;
+    @extend .mb-3;
+
+    .card {
+      height: 100%;
+    }
+  }
+}

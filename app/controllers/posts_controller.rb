@@ -5,8 +5,9 @@ class PostsController < ApplicationController
   before_action :set_post_path, only: [:show]
 
   def index
-    @posts = @branch.posts.open.includes(:user).page(params[:page])
-    # @contributors = User.joins(:posts, :comments).group("users.id").select("users.*, count(posts.id) + count(comments.id) AS count").order("count DESC").limit(3)
+    model = @branch.slug == "master" ? Post : @branch.posts
+
+    @posts = model.open.includes(:user).page(params[:page])
   end
 
   def new
@@ -15,8 +16,6 @@ class PostsController < ApplicationController
 
   def show
     @comments = @post.comments.order("created_at ASC")
-    @moderator = User.first
-    @contributors = User.joins(:posts, :comments).group("users.id").select("users.*, count(posts.id) + count(comments.id) AS count").order("count DESC").limit(3)
   end
 
   def create
