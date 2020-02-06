@@ -1,3 +1,6 @@
+<div class="post-action mb-3 text-right">
+  <%= link_to "New Post", new_branch_post_path(branch: @branch.slug), class: "btn-primary btn btn-sm" %>
+</div>
 <div class="post-list">
   <% if @posts.present? %>
     <%= render partial: "posts/post", collection: @posts %>

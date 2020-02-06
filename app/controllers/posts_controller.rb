@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:show, :index]
-  before_action :set_post, only: [:show, :destroy, :resolve, :close]
-  before_action :set_branch_path, only: [:index, :show]
-  before_action :set_post_path, only: [:show]
+  before_action :set_post, only: [:show, :destroy, :resolve, :close, :edit]
+  before_action :set_branch_path, only: [:index, :show, :new, :edit]
+  before_action :set_post_path, only: [:show, :edit]
+  before_action :set_action_post_path, only: [:new, :edit]
 
   def index
     model = @branch.slug == "master" ? Post : @branch.posts
@@ -11,7 +12,10 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = Post.new(branch_id: @branch.id)
+  end
+
+  def edit
   end
 
   def show
@@ -23,7 +27,17 @@ class PostsController < ApplicationController
 
     flash[:notice] = {success: "You have created the post!"}
 
-    redirect_to slug_post_path(branch: post.branch.slug, id: post.id, slug: post.slug)
+    redirect_to slug_branch_post_path(branch: post.branch.slug, id: post.id, slug: post.slug)
+  end
+
+  def update
+    post = current_user.posts.find(params[:id])
+    post.assign_attributes(post_params)
+    post.save!
+
+    flash[:notice] = {success: "You have updated the post!"}
+
+    redirect_to slug_branch_post_path(branch: post.branch.slug, id: post.id, slug: post.slug)    
   end
 
   def destroy
@@ -70,6 +84,14 @@ class PostsController < ApplicationController
   end
 
   def set_post_path
-    add_breadcrumb(@post.title, slug_post_path(branch: 'master', id: params[:id], slug: params[:slug]))
+    add_breadcrumb(@post.title, slug_branch_post_path(branch: @branch.slug, id: @post.id, slug: @post.slug))
+  end
+
+  def set_action_post_path
+    if @post&.persisted?
+      add_breadcrumb("Edit Post", edit_branch_post_path(branch: @branch.slug, id: @post.id))
+    else
+      add_breadcrumb("New Post", new_branch_post_path(branch: @branch.slug))
+    end
   end
 end

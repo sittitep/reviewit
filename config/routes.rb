@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   resource :sessions, only: [:destroy]
-  resources :posts, only: [:new, :create, :destroy] do
+  resources :posts, only: [:new, :update, :create, :destroy] do
     member do
       post 'resolve' => 'posts#resolve'
       post 'close' => 'posts#close'
@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   scope 'b' do
     scope ':branch' do
       root 'posts#index', as: 'branch'
-      get 'posts/:id/:slug' => 'posts#show', as: 'slug_post'
+      resources :posts, as: "branch_post", only: [:new, :edit]
+
+      get 'posts/:id/:slug' => 'posts#show', as: 'slug_branch_post'
     end
   end
 end

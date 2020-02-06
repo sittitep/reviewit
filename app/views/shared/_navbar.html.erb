@@ -1,16 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
   <div class="container">
-    <%= link_to root_path, class: "", style: "text-decoration: none" do %>
+    <%= link_to root_path, class: "mr-3", style: "text-decoration: none" do %>
       <%= image_pack_tag("logo.png", width: 26, class: "mr-1") %> <span class="small text-dark font-weight-bold">reviewit</span>
     <% end %>
-    <div class="ml-4 mr-auto d-flex align-items-center small">
+    <div class="mr-auto d-flex align-items-center small">
       <%= link_to "b/master", branch_path(branch: 'master'), class: "text-muted" %>
     </div>
     <% if current_user %>
       <div class="ml-auto d-flex align-items-center small">
-        </span><%= image_tag(current_user.avatar_url, width: 26, class: "rounded-circle d-none d-md-inline") %>
-        <span class="text-muted d-none d-md-inline ml-2"><%= current_user.name %></span>
-        <%= link_to "Create a Post", new_post_path, class: "mr-4 btn-outline-primary btn btn-sm ml-4"  %>
+        </span><%= image_tag(current_user.avatar_url, width: 26, class: "rounded-circle d-none d-md-inline mr-1") %>
+        <span class="text-muted d-none d-md-inline mr-3"><%= current_user.name %></span>
         <%= link_to "Logout", sessions_path, method: :delete, class: "text-muted" %>
       </div>
     <% else %>
